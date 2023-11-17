@@ -27,14 +27,14 @@ A) Two files regarding the dataset
 
 B) Commands for to run the code ( organized step-by-step):
  1) **``` python protein_ligand_sets.py ```** - To construct the training, test, and validation sets. For each subset, we write as. txt file with unique proteins, ligands, and interactions included in that set.
- 2) ```python FeatureExtraction_ifeature.py``` - to export protein features from iFeature. This script receives a fasta file with all protein sequences from a dataset (in this case, unique_uniprot.fa)
- 3) ```python h5_ifeature_final.py``` - For the normalization of the iFeature features it receives. txt of proteins in the training, test, and validation sets and writes a. h5 file with iFeature descriptors normalized by training.
- 4) ```python FeatureExtraction-mordred.py``` - To export ligand features from MORDRED. This script access ligand's smiles through the "Canonical Smiles" column from the main dataset and exports a .h5 file ("")
- 5) ```bash fp_admet.sh``` - to extract fp-admet descriptors. 
- 6) ```python process_admet_features.py``` - To normalize fp-admet descriptors. It receives .txt of ligands in the training, testing, and validation sets, and write a. h5 files with ADMET descriptors normalized by training.
- 7) ```python FeatureExtraction-family.py``` - To construct a one-hot encoding feature for the protein family, based on ChEMBL's classification. The script accepts two words. csv files: one with the protein ID ("single_proteins_id_noduplicate.csv") and other with the ChEMBL's family classification ("targets_family.csv"). It writes a .txt for each family name and a. h5 file to save the corresponding values.
+ 2) **```python FeatureExtraction_ifeature.py```** - to export protein features from iFeature. This script receives a fasta file with all protein sequences from a dataset (in this case, unique_uniprot.fa)
+ 3) **```python h5_ifeature_final.py```** - For the normalization of the iFeature features it receives. txt of proteins in the training, test, and validation sets and writes a. h5 file with iFeature descriptors normalized by training.
+ 4) **```python FeatureExtraction-mordred.py```** - To export ligand features from MORDRED. This script access ligand's smiles through the "Canonical Smiles" column from the main dataset and exports a .h5 file ("")
+ 5) **```bash fp_admet.sh```** - to extract fp-admet descriptors. 
+ 6) **```python process_admet_features.py```** - To normalize fp-admet descriptors. It receives .txt of ligands in the training, testing, and validation sets, and write a. h5 files with ADMET descriptors normalized by training.
+ 7) **```python FeatureExtraction-family.py```** - To construct a one-hot encoding feature for the protein family, based on ChEMBL's classification. The script accepts two words. csv files: one with the protein ID ("single_proteins_id_noduplicate.csv") and other with the ChEMBL's family classification ("targets_family.csv"). It writes a .txt for each family name and a. h5 file to save the corresponding values.
 
 C) Commands to construct and run the model (the 3 best models are included here):
- 1) ```python model_random_forest.py``` - To construct a Random Forest (RF). It accesses the .h5 files to retrieve interaction features.
- 2) ```python model_xgboost.py``` - To construct an Extreme Gradient Boosting algorithm. It accesses the .h5 files to retrieve interaction features.
- 3) ```python model_xtrees.py``` - To construct an Ensemble of Extreme Randomized Trees. It accesses the .h5 files to retrieve interaction features.
+ 1) **```python model_random_forest.py```** - To construct a Random Forest (RF). It accesses the .h5 files to retrieve interaction features.
+ 2) **```python model_xgboost.py```** - To construct an Extreme Gradient Boosting algorithm. It accesses the .h5 files to retrieve interaction features.
+ 3) **```python model_xtrees.py```** - To construct an Ensemble of Extreme Randomized Trees. It accesses the .h5 files to retrieve interaction features.
