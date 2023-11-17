@@ -13,7 +13,7 @@ B) Scripts for Feature Extraction (herein organized step-by-step):
   2) FeatureExtraction_ifeature.py - to export protein features from iFeature. This script receives a fasta file with all protein sequences from a dataset (in this case, unique_uniprot.fa)
   3) h5_ifeature_final.py - for iFeature features' normalization. It receives .txt of proteins in the train, test and validation sets and writes a .h5 file with iFeature descriptors normalized by train.
   4) FeatureExtraction-mordred.py - to export ligand features from MORDRED. This script access ligand's smiles through the "Canonical Smiles" column from the main dataset and exports a .h5 file ("")
-  5) fp_admet.sh - to extract fp-admet descriptors.
+  5) Folder fp_admet master - uses the fp_admet.sh to extract fp-admet descriptors.
   6) process_admet_features.py - to normalize fp-admet descriptors. It receives .txt of ligands in the train, test and validation sets and writes a .h5 file with ADMET descriptors normalized by train.
   7) FeatureExtraction-family.py - to construct a one-hot encoding feature for protein's family, based on ChEMBL's classification. This script accepts two .csv files: one with protein's ID ("single_proteins_id_noduplicate.csv") and other with the ChEMBL's family classification ("targets_family.csv"). It writes a .txt of each family name and a .h5 file saving the corresponding values.
 
