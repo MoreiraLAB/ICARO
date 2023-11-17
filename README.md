@@ -6,8 +6,9 @@ The search for new pharmaceutical products has become increasingly difficult and
 ![Graphical Abstract](Graphical_Abstract.png)⁩
 
 ### Requirements:
+iFeature - GitHub available at https://github.com/Superzchen/iFeature. You should download the iFeature folder and paste it into this git home directory.
 
-In this Repository one can find the information required to replicate ICARO: an ensemble of Extreme Randomized Trees for Predicition of Protein-Ligand IC50.
+In this Repository one can find the information required to replicate ICARO: an ensemble of Extreme Randomized Trees for Prediction of Protein-Ligand IC50.
 
 ### To replicate this study, you need:
 A) Two files regarding the dataset
