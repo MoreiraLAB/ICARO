@@ -8,7 +8,7 @@ The search for new pharmaceutical products has become increasingly difficult and
 ### Requirements:
 * iFeature - GitHub available at https://github.com/Superzchen/iFeature. You should download the iFeature folder and paste it into this git home directory.
 * fp-admet - Github available at https://github.com/jcheminform/fpadmet. Folder is already included in this GitHub.
-* MORDRED - versions 1.2.0.
+* MORDRED - version 1.2.0.
 * numpy - version 1.26.0
 * pandas - version 2.1.1
 * scikit-learn - version 1.3.1
