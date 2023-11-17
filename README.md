@@ -26,7 +26,7 @@ A) Two files regarding the dataset
  2) unique_uniprotid.fa - A FASTA file representing all the unique protein sequences included in the main dataset (IC50_values.csv).
 
 B) Commands for to run the code ( organized step-by-step):
- 1) ``` python protein_ligand_sets.py ``` - To construct the training, test, and validation sets. For each subset, we write as. txt file with unique proteins, ligands, and interactions included in that set.
+ 1) **``` python protein_ligand_sets.py ```** - To construct the training, test, and validation sets. For each subset, we write as. txt file with unique proteins, ligands, and interactions included in that set.
  2) ```python FeatureExtraction_ifeature.py``` - to export protein features from iFeature. This script receives a fasta file with all protein sequences from a dataset (in this case, unique_uniprot.fa)
  3) ```python h5_ifeature_final.py``` - For the normalization of the iFeature features it receives. txt of proteins in the training, test, and validation sets and writes a. h5 file with iFeature descriptors normalized by training.
  4) ```python FeatureExtraction-mordred.py``` - To export ligand features from MORDRED. This script access ligand's smiles through the "Canonical Smiles" column from the main dataset and exports a .h5 file ("")
