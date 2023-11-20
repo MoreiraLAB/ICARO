@@ -21,6 +21,7 @@ These requirements can be installed using pip.
 * iFeature - GitHub available at https://github.com/Superzchen/iFeature. You should download the iFeature folder and paste it into this git home directory.
 * fp-admet - Github available at https://github.com/jcheminform/fpadmet. You should download the fp-admet folder and paste it into this git home directory.
 * MORDRED - version 1.2.0 .
+* RDKit - version 2023.9.1 .
 * numpy - version 1.26.0 .
 * pandas - version 2.1.1 .
 * scikit-learn - version 1.3.1 .
