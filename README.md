@@ -10,7 +10,7 @@ ICARO<sub>ERT</sub> was developed and tested as follows:
 > Python 3.6.9 (default, Mar 10 2023, 16:46:00)
 
 We recommend creating an isolated Conda environment to run our pipeline, which can be performed using the following code:
-> conda create --name icaro python=3.9
+> conda create --name icaro python=3.6.9
 > conda activate icaro
 
 Note: The environment name, defined after the "--name" argument in the first step, can be whatever the user desires.
