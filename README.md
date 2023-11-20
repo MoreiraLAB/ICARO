@@ -7,7 +7,7 @@ The search for new pharmaceutical products has become increasingly difficult and
 
 ### Prerequisites:
 ICARO<sub>ERT</sub> was developed and tested as follows:
-> Python v3.9.13
+> Python 3.6.9 (default, Mar 10 2023, 16:46:00)
 
 We recommend creating an isolated Conda environment to run our pipeline, which can be performed using the following code:
 > conda create --name icaro python=3.9
