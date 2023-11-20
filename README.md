@@ -33,8 +33,7 @@ These requirements can be installed using pip.
 Required information to replicate ICARO<sub>ERT</sub>: an ensemble of Extreme Randomized Trees for Prediction of Protein-Ligand IC<sub>50</sub> is described in this Repository.
 
 ### Study Replication:
-A) Dataset files:
- Dataset files are available at 10.5281/zenodo.10159825
+A) Dataset files: Available at 10.5281/zenodo.10159825
  1) IC50_values.csv - The main dataset where Protein-Ligand Interactions (PLI) and their pIC50 binding affinities are described, as well as some useful information on the protein and ligand involved in each interaction.
  2) unique_uniprotid.fa - A FASTA file representing all the unique protein sequences, included in the main IC50_values.csv dataset.
 
