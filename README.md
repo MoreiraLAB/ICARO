@@ -5,7 +5,18 @@ The search for new pharmaceutical products has become increasingly difficult and
 
 ![Graphical Abstract](Graphical_Abstract.png)⁩
 
+### Prerequisites:
+ICARO<sub>ERT</sub> was developed and tested as follows:
+> Python v3.9.13
+
+We recommend creating an isolated Conda environment to run our pipeline, which can be performed using the following code:
+> conda create --name icaro python=3.9
+> conda activate icaro
+
+Note: The environment name, defined after the "--name" argument in the first step, can be whatever the user desires.
+
 ### Requirements:
+These requirements can be installed using pip.
 * iFeature - GitHub available at https://github.com/Superzchen/iFeature. You should download the iFeature folder and paste it into this git home directory.
 * fp-admet - Github available at https://github.com/jcheminform/fpadmet. Folder is already included in this GitHub.
 * MORDRED - version 1.2.0 .
@@ -18,23 +29,28 @@ The search for new pharmaceutical products has become increasingly difficult and
 * xgboost - version 2.0.2 .
 
 
-In this Repository one can find the information required to replicate ICARO<sub>ERT</sub>: an ensemble of Extreme Randomized Trees for Prediction of Protein-Ligand IC<sub>50</sub>.
+Required information to replicate ICARO<sub>ERT</sub>: an ensemble of Extreme Randomized Trees for Prediction of Protein-Ligand IC<sub>50</sub> is described in this Repository.
 
-### To replicate this study, you need:
-A) Two files regarding the dataset
- 1) IC50_values.csv - The main dataset where Protein-Ligand Interactions (PLI) and their binding affinities in terms of pIC50 are described, as well as some useful information on the protein and ligand involved in each interaction.
- 2) unique_uniprotid.fa - A FASTA file representing all the unique protein sequences included in the main dataset (IC50_values.csv).
+### Study Replication:
+A) Dataset files:
+ 1) IC50_values.csv - The main dataset where Protein-Ligand Interactions (PLI) and their pIC50 binding affinities are described, as well as some useful information on the protein and ligand involved in each interaction.
+ 2) unique_uniprotid.fa - A FASTA file representing all the unique protein sequences, included in the main IC50_values.csv dataset.
 
-B) Commands for to run the code ( organized step-by-step):
- 1) **``` python protein_ligand_sets.py ```** - To construct the training, test, and validation sets. For each subset, we write as. txt file with unique proteins, ligands, and interactions included in that set.
- 2) **```python FeatureExtraction_ifeature.py```** - to export protein features from iFeature. This script receives a fasta file with all protein sequences from a dataset (in this case, unique_uniprot.fa)
- 3) **```python h5_ifeature_final.py```** - For the normalization of the iFeature features it receives. txt of proteins in the training, test, and validation sets and writes a. h5 file with iFeature descriptors normalized by training.
- 4) **```python FeatureExtraction-mordred.py```** - To export ligand features from MORDRED. This script access ligand's smiles through the "Canonical Smiles" column from the main dataset and exports a .h5 file ("")
- 5) **```bash fp_admet.sh```** - to extract fp-admet descriptors. 
- 6) **```python process_admet_features.py```** - To normalize fp-admet descriptors. It receives .txt of ligands in the training, testing, and validation sets, and write a. h5 files with ADMET descriptors normalized by training.
- 7) **```python FeatureExtraction-family.py```** - To construct a one-hot encoding feature for the protein family, based on ChEMBL's classification. The script accepts two words. csv files: one with the protein ID ("single_proteins_id_noduplicate.csv") and other with the ChEMBL's family classification ("targets_family.csv"). It writes a .txt for each family name and a. h5 file to save the corresponding values.
+B) Script files:
+After performing the changes previously indicated and properly installing and setting up the environment, these scripts should simply run without requiring changes.
+ 0) **```icaro_resources.py```** - Includes several variables and functions that will be called throughout the pipeline.
+ 1) **```1_dataset_split.py```** - Dataset split script, creating a training, test, and validation set. Each subset is written as a txt file with unique proteins, ligands, and interactions included in each set.
+ 2) **```2_FeatureExtraction_ifeature.py```** - Retrieves iFeature protein features. From a fasta file with protein sequences from a dataset, it exports ifeature protein features.
+ 3) **```2_Normalization_ifeature.py```** - iFeature feature normalization script that receives a txt file of training, test, and validation proteins and writes a h5 file with iFeature descriptors normalized by training features.
+ 4) **```3_FeatureExtraction_mordred.py```** - Retrieves MORDRED ligand features. From ligand's smiles available at the "Canonical Smiles" column from the main dataset, it exports MORDRED features in a h5 file.
+ 5) **```4_fp_admet.sh```** - Retrieves fp-ADMET ligand descriptors. 
+ 6) **```4_Normalization_fp_admet.py```** - fp-ADMET descriptors normalization. It receives a txt file of ligands in the training, testing, and validation sets, and writes a h5 file with ADMET descriptors normalized by training features.
+ 7) **```5_FeatureExtraction_prt_family.py```** - Constructs a one-hot encoding feature regarding protein family, based on ChEMBL's classification. The script accepts two csv files: one with the protein ID ("single_proteins_id_noduplicate.csv") and other with the ChEMBL's family classification ("targets_family.csv"). It writes a .txt for each family name and a. h5 file to save the corresponding values.
 
-C) Commands to construct and run the model (the 3 best models are included here):
- 1) **```python model_random_forest.py```** - To construct a Random Forest (RF). It accesses the .h5 files to retrieve interaction features.
- 2) **```python model_xgboost.py```** - To construct an Extreme Gradient Boosting algorithm. It accesses the .h5 files to retrieve interaction features.
- 3) **```python model_xtrees.py```** - To construct an Ensemble of Extreme Randomized Trees. It accesses the .h5 files to retrieve interaction features.
+C) Model training and testing (the 3 best models are included here):
+ 1) **```6_model_random_forest.py```** - Trains a Random Forest (RF) model from h5 feature files from training data and tests them on test and validation sets.
+ 2) **```6_model_xgboost.py```** - Trains an Extreme Gradient Boosting algorithm from h5 feature files from training data and tests them on test and validation sets.
+ 3) **```6_model_xtrees.py```** - Trains an Ensemble of Extreme Randomized Trees from h5 feature files from training data and tests them on test and validation sets.
+
+### Please Cite:
+[Ana T. Gaspar, Catarina Marques-Pereira, António J. Preto and Irina S. Moreira - ICARO: IC<sub>50</sub> binding Affinity Regression Opti-mized] PENDING CITATION
