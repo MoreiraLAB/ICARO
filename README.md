@@ -18,8 +18,10 @@ Note: The environment name, defined after the "--name" argument in the first ste
 
 ### Requirements:
 These requirements can be installed using pip.
-* iFeature - GitHub available at https://github.com/Superzchen/iFeature. You should download the iFeature folder and paste it into this git home directory.
-* fp-admet - Github available at https://github.com/jcheminform/fpadmet. You should download the fp-admet folder and paste it into this git home directory.
+* iFeature - GitHub available at https://github.com/Superzchen/iFeature. You should download the iFeature folder and paste it into the feature folder.
+  > git clone https://github.com/Superzchen/iFeature
+* fp-admet - Github available at https://github.com/jcheminform/fpadmet. You should download the fp-admet folder and paste it into the feature folder.
+  > https://github.com/jcheminform/fpadmet.git
 * MORDRED - version 1.2.0 .
 * RDKit - version 2023.9.1 .
 * numpy - version 1.26.0 .
