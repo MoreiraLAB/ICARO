@@ -18,8 +18,8 @@ Note: The environment name, defined after the "--name" argument in the first ste
 
 ### Requirements:
 These requirements can be installed using pip.
-* iFeature - GitHub available at https://github.com/Superzchen/iFeature. You should download the iFeature folder and paste it into this git home directory.
-* fp-admet - Github available at https://github.com/jcheminform/fpadmet. You should download the fp-admet folder and paste it into this git home directory.
+* iFeature - GitHub available at https://github.com/Superzchen/iFeature. You should download the iFeature folder and paste it into the feature folder. You can install with the command: git clone https://github.com/Superzchen/iFeature
+* fp-admet - Github available at https://github.com/jcheminform/fpadmet. You should download the fp-admet folder and paste it into the feature folder.You can install with the command: https://github.com/jcheminform/fpadmet.git
 * MORDRED - version 1.2.0 .
 * RDKit - version 2023.9.1 .
 * numpy - version 1.26.0 .
@@ -45,9 +45,10 @@ After performing the changes previously indicated and properly installing and se
  2) **```2_FeatureExtraction_ifeature.py```** - Retrieves iFeature protein features. From a fasta file with protein sequences from a dataset, it exports ifeature protein features.
  3) **```2_Normalization_ifeature.py```** - iFeature feature normalization script that receives a txt file of training, test, and validation proteins and writes a h5 file with iFeature descriptors normalized by training features.
  4) **```3_FeatureExtraction_mordred.py```** - Retrieves MORDRED ligand features. From ligand's smiles available at the "Canonical Smiles" column from the main dataset, it exports MORDRED features in a h5 file.
- 5) **```4_fp_admet.sh```** - Retrieves fp-ADMET ligand descriptors. 
- 6) **```4_Normalization_fp_admet.py```** - fp-ADMET descriptors normalization. It receives a txt file of ligands in the training, testing, and validation sets, and writes a h5 file with ADMET descriptors normalized by training features.
- 7) **```5_FeatureExtraction_prt_family.py```** - Constructs a one-hot encoding feature regarding protein family, based on ChEMBL's classification. The script accepts two csv files: one with the protein ID ("single_proteins_id_noduplicate.csv") and other with the ChEMBL's family classification ("targets_family.csv"). It writes a .txt for each family name and a. h5 file to save the corresponding values.
+ 5) **```4_fp_admet.sh```** - Retrieves fp-ADMET ligand descriptors. You will need to copy this file to the folder ./features/fpadmet/ after instalation and run with
+> bash 4_fp_admet.sh
+ 7) **```4_Normalization_fp_admet.py```** - fp-ADMET descriptors normalization. It receives a txt file of ligands in the training, testing, and validation sets, and writes a h5 file with ADMET descriptors normalized by training features.
+ 8) **```5_FeatureExtraction_prt_family.py```** - Constructs a one-hot encoding feature regarding protein family, based on ChEMBL's classification. The script accepts two csv files: one with the protein ID ("single_proteins_id_noduplicate.csv") and other with the ChEMBL's family classification ("targets_family.csv"). It writes a .txt for each family name and a. h5 file to save the corresponding values.
 
 C) Model training and testing (the 3 best models are included here):
  1) **```6_model_random_forest.py```** - Trains a Random Forest (RF) model from h5 feature files from training data and tests them on test and validation sets.
