@@ -11,7 +11,7 @@ __group__ = "Data-Driven Molecular Design"
 __group_leader__ = "Irina S. Moreira"
 __project__ = "ICARO: IC50 binding Affinity Regression Optimized"
 
-#INPUT FILES: (path: "./data/") "chembl_uniprot_mapping.txt" and (path: "./support/") "IC50_values&statistics_final_dataset.csv"
+#INPUT FILES: (path: "./data/") "chembl_uniprot_mapping.txt" and (path: "./data/support/") "IC50_values&statistics_final_dataset.csv"
 #OUTPUT FILES: (path: "./results/") 
 #"train_targets.txt", "train_ligands.txt", train_interactions.txt"- files with train protein ids, ligand ids and corresponding interactions
 #"test_targets.txt", "test_ligands.txt", "test_interactions.txt"- files with test protein ids, ligand ids and corresponding interactions
