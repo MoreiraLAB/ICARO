@@ -4,7 +4,7 @@
 """
 DESCIPTION: Get protein family information on dataset proteins.
 
-INPUT FILES: (path: "./support/") "unique_prt_ids.csv, "targets_family.csv"
+INPUT FILES: (path: "./data/support/") "unique_prt_ids.csv, "targets_family.csv"
 OUTPUT FILES: (path: "./features/) "icaro_normalized_prt_family.h5"
 """
 
