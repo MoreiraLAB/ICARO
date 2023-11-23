@@ -18,8 +18,8 @@ Note: The environment name, defined after the "--name" argument in the first ste
 
 ### Requirements:
 These requirements can be installed using pip.
-* iFeature - GitHub available at https://github.com/Superzchen/iFeature. You should download the iFeature folder and paste it into the feature folder. You can install with the command: git clone https://github.com/Superzchen/iFeature
-* fp-admet - Github available at https://github.com/jcheminform/fpadmet. You should download the fp-admet folder and paste it into the feature folder.You can install with the command: https://github.com/jcheminform/fpadmet.git
+* iFeature - GitHub available at https://github.com/Superzchen/iFeature. You should download the iFeature folder into the ./feature/ folder.
+* fp-admet - Github available at https://github.com/jcheminform/fpadmet. You should download the fp-admet folder (and all its dependencies) and into the .features/ folder.
 * MORDRED - version 1.2.0 .
 * RDKit - version 2023.9.1 .
 * numpy - version 1.26.0 .
@@ -34,26 +34,45 @@ These requirements can be installed using pip.
 Required information to replicate ICARO<sub>ERT</sub>: an ensemble of Extreme Randomized Trees for Prediction of Protein-Ligand IC<sub>50</sub> is described in this Repository.
 
 ### Study Replication:
-A) Dataset files: Available at 10.5281/zenodo.10159825
- 1) IC50_values.csv - The main dataset where Protein-Ligand Interactions (PLI) and their pIC50 binding affinities are described, as well as some useful information on the protein and ligand involved in each interaction.
- 2) unique_uniprotid.fa - A FASTA file representing all the unique protein sequences, included in the main IC50_values.csv dataset.
+A) Dataset files: All data and support files are available in 10.5281/zenodo.10159825
+   Please, download data files into ./ICARO/data/ folder.
 
 B) Script files:
-After performing the changes previously indicated and properly installing and setting up the environment, these scripts should simply run without requiring changes.
+After performing the changes previously indicated and properly installing and setting up the environment, these scripts should simply run without requiring any changes.
+
  0) **```icaro_resources.py```** - Includes several variables and functions that will be called throughout the pipeline.
- 1) **```1_dataset_split.py```** - Dataset split script, creating a training, test, and validation set. Each subset is written as a txt file with unique proteins, ligands, and interactions included in each set.
- 2) **```2_FeatureExtraction_ifeature.py```** - Retrieves iFeature protein features. From a fasta file with protein sequences from a dataset, it exports ifeature protein features.
+ 1) **```1_dataset_split.py```** - Dataset split script, creating a training, test, and validation set. Each subset is written as a txt file with unique proteins, ligands, and interactions included in each set. It creates a new ./results/ and ./feature/ folder.
+> python3 1_dataset_split.py
+
+ 2) **```2_FeatureExtraction_ifeature.py```** - Retrieves iFeature protein features. From a fasta file with protein sequences from a dataset, it exports ifeature protein features. It requires to install iFeature within the ./feature/ folder.
+> cd ../features/
+> git clone https://github.com/Superzchen/iFeature
+> cd ../scripts/
+> python3 2_FeatureExtraction_ifeature.py
+
  3) **```2_Normalization_ifeature.py```** - iFeature feature normalization script that receives a txt file of training, test, and validation proteins and writes a h5 file with iFeature descriptors normalized by training features.
+> python3 2_Normalization_ifeature.py
+
  4) **```3_FeatureExtraction_mordred.py```** - Retrieves MORDRED ligand features. From ligand's smiles available at the "Canonical Smiles" column from the main dataset, it exports MORDRED features in a h5 file.
+> python3 3_FeatureExtraction_mordred.py
+
  5) **```4_fp_admet.sh```** - Retrieves fp-ADMET ligand descriptors. You will need to copy this file to the folder ./features/fpadmet/ after instalation and run with
+> cd ../features/
+> git clone https://github.com/jcheminform/fpadmet.git
+> cd ../scripts/
+> cp 4_fp_admet.sh ../features/fpadmet/
+> cd ../features/
 > bash 4_fp_admet.sh
+> cd ../scripts/
+
  7) **```4_Normalization_fp_admet.py```** - fp-ADMET descriptors normalization. It receives a txt file of ligands in the training, testing, and validation sets, and writes a h5 file with ADMET descriptors normalized by training features.
+> python3 4_Normalization_fp_admet.py
+
  8) **```5_FeatureExtraction_prt_family.py```** - Constructs a one-hot encoding feature regarding protein family, based on ChEMBL's classification. The script accepts two csv files: one with the protein ID ("single_proteins_id_noduplicate.csv") and other with the ChEMBL's family classification ("targets_family.csv"). It writes a .txt for each family name and a. h5 file to save the corresponding values.
+> python3 5_FeatureExtraction_prt_family.py
 
-C) Model training and testing (the 3 best models are included here):
- 1) **```6_model_random_forest.py```** - Trains a Random Forest (RF) model from h5 feature files from training data and tests them on test and validation sets.
- 2) **```6_model_xgboost.py```** - Trains an Extreme Gradient Boosting algorithm from h5 feature files from training data and tests them on test and validation sets.
- 3) **```6_model_xtrees.py```** - Trains an Ensemble of Extreme Randomized Trees from h5 feature files from training data and tests them on test and validation sets.
+ 9)  **```6_model_xtrees.py```** - Trains an Ensemble of Extreme Randomized Trees from h5 feature files from training data and tests them on test and validation sets.
+> python3 6_model_xtrees.py
 
-### Please Cite:
+### If you use our predictor, please cite:
 [Ana T. Gaspar, Catarina Marques-Pereira, António J. Preto and Irina S. Moreira - ICARO: IC<sub>50</sub> binding Affinity Regression Opti-mized] PENDING CITATION
