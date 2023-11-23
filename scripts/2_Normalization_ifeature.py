@@ -7,7 +7,7 @@ DESCIPTION: Normalize ifeature descriptors, calculating mean and standard deviat
 NOTE: When running this script check if there is no file named iFeature_all_variances.txt in your features directory
 
 INPUT FILES: (path: "./results/) "train_targets.txt", "test_targets.txt" and "validation_unique_targets.txt"
-OUTPUT FILES: (path: "./features/) "train_targets.txt", "iFeature_header.txt" and "icaro_normalized_ifeature.h5"
+OUTPUT FILES: (path: "./features/) "iFeature_all_variances.txt", "iFeature_header.txt" and "icaro_normalized_ifeature.h5"
 """
 
 __author__ = "A.T. Gaspar"
