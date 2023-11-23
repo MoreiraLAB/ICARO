@@ -45,11 +45,12 @@ After performing the changes previously indicated and properly installing and se
 > python3 1_dataset_split.py
 
  2) **```2_FeatureExtraction_ifeature.py```** - Retrieves iFeature protein features. From a fasta file with protein sequences from a dataset, it exports ifeature protein features. It requires to install iFeature within the ./feature/ folder.
-> cd ../features/
-> git clone https://github.com/Superzchen/iFeature
-> cd ../scripts/
-> python3 2_FeatureExtraction_ifeature.py
-
+```bash
+cd ../features/
+git clone https://github.com/Superzchen/iFeature
+cd ../scripts/
+python3 2_FeatureExtraction_ifeature.py
+```
  3) **```2_Normalization_ifeature.py```** - iFeature feature normalization script that receives a txt file of training, test, and validation proteins and writes a h5 file with iFeature descriptors normalized by training features.
 > python3 2_Normalization_ifeature.py
 
