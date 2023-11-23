@@ -10,10 +10,10 @@ ICARO<sub>ERT</sub> was developed and tested as follows:
 > Python 3.6.9 (default, Mar 10 2023, 16:46:00)
 
 We recommend creating an isolated Conda environment to run our pipeline, which can be performed using the following code:
-> conda create --name icaro python=3.6.9
-
-> conda activate icaro
-
+```bash
+conda create --name icaro python=3.6.9
+conda activate icaro
+```
 Note: The environment name, defined after the "--name" argument in the first step, can be whatever the user desires.
 
 ### Requirements:
@@ -42,7 +42,9 @@ After performing the changes previously indicated and properly installing and se
 
  0) **```icaro_resources.py```** - Includes several variables and functions that will be called throughout the pipeline.
  1) **```1_dataset_split.py```** - Dataset split script, creating a training, test, and validation set. Each subset is written as a txt file with unique proteins, ligands, and interactions included in each set. It creates a new ./results/ and ./feature/ folder.
+```bash
 > python3 1_dataset_split.py
+```
 
  2) **```2_FeatureExtraction_ifeature.py```** - Retrieves iFeature protein features. From a fasta file with protein sequences from a dataset, it exports ifeature protein features. It requires to install iFeature within the ./feature/ folder.
 ```bash
@@ -55,9 +57,12 @@ python3 2_FeatureExtraction_ifeature.py
 > python3 2_Normalization_ifeature.py
 
  4) **```3_FeatureExtraction_mordred.py```** - Retrieves MORDRED ligand features. From ligand's smiles available at the "Canonical Smiles" column from the main dataset, it exports MORDRED features in a h5 file.
+```bash
 > python3 3_FeatureExtraction_mordred.py
+```
 
  5) **```4_fp_admet.sh```** - Retrieves fp-ADMET ligand descriptors. You will need to copy this file to the folder ./features/fpadmet/ after instalation and run with
+```bash
 > cd ../features/
 > git clone https://github.com/jcheminform/fpadmet.git
 > cd ../scripts/
@@ -65,15 +70,22 @@ python3 2_FeatureExtraction_ifeature.py
 > cd ../features/
 > bash 4_fp_admet.sh
 > cd ../scripts/
+```
 
  7) **```4_Normalization_fp_admet.py```** - fp-ADMET descriptors normalization. It receives a txt file of ligands in the training, testing, and validation sets, and writes a h5 file with ADMET descriptors normalized by training features.
+```bash
 > python3 4_Normalization_fp_admet.py
+```
 
  8) **```5_FeatureExtraction_prt_family.py```** - Constructs a one-hot encoding feature regarding protein family, based on ChEMBL's classification. The script accepts two csv files: one with the protein ID ("single_proteins_id_noduplicate.csv") and other with the ChEMBL's family classification ("targets_family.csv"). It writes a .txt for each family name and a. h5 file to save the corresponding values.
+```bash
 > python3 5_FeatureExtraction_prt_family.py
+```
 
  9)  **```6_model_xtrees.py```** - Trains an Ensemble of Extreme Randomized Trees from h5 feature files from training data and tests them on test and validation sets.
+```bash
 > python3 6_model_xtrees.py
+```
 
 ### If you use our predictor, please cite:
 [Ana T. Gaspar, Catarina Marques-Pereira, António J. Preto and Irina S. Moreira - ICARO: IC<sub>50</sub> binding Affinity Regression Opti-mized] PENDING CITATION
