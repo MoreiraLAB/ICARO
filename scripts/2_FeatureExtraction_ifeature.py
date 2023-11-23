@@ -9,8 +9,8 @@ make sure that you have iFeature folder in "./feature/" folder, you can download
 > git clone https://github.com/Superzchen/iFeature
 
 INPUT FILES: (path: "./data/") "unique_uniprotid.fa"
-OUTPUT FILES: (path: "./results/results_ifeature/") 
-for each ifeature feature, a .tsv file is saved on "./results/results_ifeature/" folder
+OUTPUT FILES: (path: "./features/results_ifeature/") 
+for each ifeature feature, a .tsv file is saved on "./features/results_ifeature/" folder
 """
 
 __author__ = "A.J. Preto"
