@@ -9,7 +9,7 @@ NOTE: Initiate icaro_env environment. This environment needs to be python versio
 - pip install mordred 
 - pip install pandas
 
-INPUT FILES: (path: "./support/") "Davis_comp_smiles.csv"
+INPUT FILES: (path: "./data/support/") "Davis_comp_smiles.csv"
 OUTPUT FILES: 
 - path: "./features/davis_mordred/" with all mordred descriptors
 - (path: "./features/") "icaro_davis_mordred_features.h5" an h5 file with mordred features
