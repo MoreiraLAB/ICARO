@@ -22,7 +22,7 @@ These requirements can be met using a pip.
 * iFeature - GitHub available at https://github.com/Superzchen/iFeature. The iFeature folder should be downloaded into. /feature/ folder.
 
 * fp-admet - Github available at https://github.com/jcheminform/fpadmet. YThe fp-admet folder should be downloaded into. /feature/ folder.
-* 
+  
 * MORDRED - version 1.2.0 .
 * RDKit - version 2023.9.1 .
 * numpy - version 1.26.0 .
