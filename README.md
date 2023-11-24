@@ -17,9 +17,12 @@ conda activate icaro
 Note: The environment name, defined after the "--name" argument in the first step, can be whatever the user desires.
 
 ### Requirements:
-These requirements can be installed using pip.
-* iFeature - GitHub available at https://github.com/Superzchen/iFeature. You should download the iFeature folder into the ./feature/ folder.
-* fp-admet - Github available at https://github.com/jcheminform/fpadmet. You should download the fp-admet folder (and all its dependencies) and into the .features/ folder.
+These requirements can be met using a pip.
+
+* iFeature - GitHub available at https://github.com/Superzchen/iFeature. The iFeature folder should be downloaded into. /feature/ folder.
+
+* fp-admet - Github available at https://github.com/jcheminform/fpadmet. YThe fp-admet folder should be downloaded into. /feature/ folder.
+* 
 * MORDRED - version 1.2.0 .
 * RDKit - version 2023.9.1 .
 * numpy - version 1.26.0 .
@@ -40,25 +43,29 @@ A) Dataset files: All data and support files are available in 10.5281/zenodo.101
 B) Script files:
 After performing the changes previously indicated and properly installing and setting up the environment, these scripts should simply run without requiring any changes.
 
- 0) **```icaro_resources.py```** - Includes several variables and functions that will be called throughout the pipeline.
- 1) **```1_dataset_split.py```** - Dataset split script, creating a training, test, and validation set. Each subset is written as a txt file with unique proteins, ligands, and interactions included in each set. It creates a new ./results/ and ./feature/ folder.
+ 0) **```icaro_resources.py```** - Includes several variables and functions that are called throughout the pipeline.
+ 1) **```1_dataset_split.py```** - Dataset split script, creating training, test, and validation sets. Each subset was written as a txt file with unique proteins, ligands, and interactions included in each set. It creates a new ./results/ and ./feature/ folder.
+
 ```bash
 python3 1_dataset_split.py
 ```
 
- 2) **```2_FeatureExtraction_ifeature.py```** - Retrieves iFeature protein features. From a fasta file with protein sequences from a dataset, it exports ifeature protein features. It requires to install iFeature within the ./feature/ folder.
+ 2) **```2_FeatureExtraction_ifeature.py```** - Retrieves iFeature protein features. A FASTA file with protein sequences from a dataset exports signature protein features. This requires the installation of an iFeature within . /feature/ folder.
+
 ```bash
 cd ../features/
 git clone https://github.com/Superzchen/iFeature
 cd ../scripts/
 python3 2_FeatureExtraction_ifeature.py
 ```
- 3) **```2_Normalization_ifeature.py```** - iFeature feature normalization script that receives a txt file of training, test, and validation proteins and writes a h5 file with iFeature descriptors normalized by training features.
+ 3) **```2_Normalization_ifeature.py```** - - iFeature feature normalization script that receives a txt file of training, test, and validation proteins and writes an h5 file with iFeature descriptors normalized by the training features.
+
 ```bash
 python3 2_Normalization_ifeature.py
 ```
 
  4) **```3_FeatureExtraction_mordred.py```** - Retrieves MORDRED ligand features. From ligand's smiles available at the "Canonical Smiles" column from the main dataset, it exports MORDRED features in a h5 file.
+
 ```bash
 python3 3_FeatureExtraction_mordred.py
 ```
@@ -74,20 +81,23 @@ bash 4_fp_admet.sh
 cd ../scripts/
 ```
 
- 7) **```4_Normalization_fp_admet.py```** - fp-ADMET descriptors normalization. It receives a txt file of ligands in the training, testing, and validation sets, and writes a h5 file with ADMET descriptors normalized by training features.
+ 7) **```4_Normalization_fp_admet.py```** - fp-ADMET descriptors normalization. It receives a txt file of ligands in the training, testing, and validation sets and writes an h5 file with ADMET descriptors normalized by training features.
+
 ```bash
 python3 4_Normalization_fp_admet.py
 ```
 
- 8) **```5_FeatureExtraction_prt_family.py```** - Constructs a one-hot encoding feature regarding protein family, based on ChEMBL's classification. The script accepts two csv files: one with the protein ID ("single_proteins_id_noduplicate.csv") and other with the ChEMBL's family classification ("targets_family.csv"). It writes a .txt for each family name and a. h5 file to save the corresponding values.
+ 8) **```5_FeatureExtraction_prt_family.py```** - Constructs a one-hot encoding feature regarding protein family based on ChEMBL's classification. The script accepts two csv files: one with the protein ID ("single_proteins_id_noduplicate.csv") and other with the ChEMBL's family classification ("targets_family.csv"). It writes a .txt for each family name, and an h5 file to save the corresponding values.
+
 ```bash
 python3 5_FeatureExtraction_prt_family.py
 ```
 
- 9)  **```6_model_xtrees.py```** - Trains an Ensemble of Extreme Randomized Trees from h5 feature files from training data and tests them on test and validation sets.
+ 9)  **```6_model_xtrees.py```** - Trains an Ensemble of Extreme Randomized Trees from h5 feature files from training data and tests them on the test and validation sets.
 ```bash
 python3 6_model_xtrees.py
 ```
 
-### If you use our predictor, please cite:
+### If you use our predictor, please cite the following.
+
 [Ana T. Gaspar, Catarina Marques-Pereira, António J. Preto and Irina S. Moreira - ICARO: IC<sub>50</sub> binding Affinity Regression Opti-mized] PENDING CITATION
