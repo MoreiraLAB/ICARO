@@ -5,10 +5,10 @@
 DESCRIPTION: Normalize a dataset via a batch processing for large datasets.
 Stores the standard deviation and average for each column. 
 
-INPUT FILES: (path: "./features/") "icaro_davis_mordred_features.h5"
+INPUT FILES: (path: "./features/") "icaro_mordred_features.h5"
 OUTPUT FILES: 
-- (path: "./features/") "davis_norm.csv" with standard deviation and average for each column.
-- (path: "./features/") "icaro_mordred_normalized_features_davis.h5"
+- (path: "./features/") "mordred_norm.csv" with standard deviation and average for each column.
+- (path: "./features/") "icaro_mordred_normalized_features.h5"
 """
 
 __author__ = "A.J. Preto"
@@ -220,7 +220,7 @@ class normalizer:
 						print("Normalized values at", index + 1, "/", self.number_of_entries)
 
 from icaro_variables import TRAIN_SPLITS_FILE, MORDRED_FEATURES_FILE_H5, MORDRED_NORMALIZED_FEATURES_FILE_H5, \
-							MORDRED_DAVIS_NORMALIZED_FEATURES_FILE_H5, MORDRED_DAVIS_FEATURES_FILE_H5, SUPPORT_FOLDER
+							MORDRED_NORMALIZED_FEATURES_FILE_H5, MORDRED_FEATURES_FILE_H5, SUPPORT_FOLDER
 
 """
 Generate the file with the normalization metrics
@@ -232,20 +232,14 @@ input_header_file = SUPPORT_FOLDER+"/CHEMBL2.csv" # Example file containing the 
 Run first block to calculate normalization vectors, second block to actually normalize
 """
 train_ids_list = retrieve_ids_list(TRAIN_SPLITS_FILE)
-"""
+print("#### ICARO- MORDRED Normalization")
+
 normalizer_object = normalizer(source = MORDRED_FEATURES_FILE_H5, \
 						header_file = input_header_file, \
 						droppable_columns = ["ID", "SMILE"], usable_entries = train_ids_list)
 normalizer_object.attach_header()
 normalizer_object.retrieve_standard_deviations()
 normalizer_object.report()
-"""
-print("#### ICARO- MORDRED Normalization")
-to_normalize_object = normalizer(source = MORDRED_DAVIS_FEATURES_FILE_H5, \
-								header_file = input_header_file, \
-								droppable_columns = ["ID", "SMILE"], usable_entries = train_ids_list)
-to_normalize_object.attach_header()
-to_normalize_object.retrieve_standard_deviations()
-to_normalize_object.report()
-to_normalize_object.filter_normalization(save_new = True, new_norm_csv = "davis_norm.csv")
-to_normalize_object.apply_normalization(output_file_name = MORDRED_DAVIS_NORMALIZED_FEATURES_FILE_H5)
+
+to_normalize_object.filter_normalization(save_new = True, new_norm_csv = "mordred_norm.csv")
+to_normalize_object.apply_normalization(output_file_name = MORDRED_NORMALIZED_FEATURES_FILE_H5)
