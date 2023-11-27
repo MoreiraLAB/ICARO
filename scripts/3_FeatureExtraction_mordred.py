@@ -9,10 +9,10 @@ NOTE: Initiate icaro_env environment. This environment needs to be python versio
 - pip install mordred 
 - pip install pandas
 
-INPUT FILES: (path: "./data/support/") "Davis_comp_smiles.csv"
+INPUT FILES: (path: "./support/") "Mordred_comp_smiles.csv"
 OUTPUT FILES: 
-- path: "./features/davis_mordred/" with all mordred descriptors
-- (path: "./features/") "icaro_davis_mordred_features.h5" an h5 file with mordred features
+- path: "./features/mordred/" with all mordred descriptors
+- (path: "./features/") "icaro_mordred_features.h5" an h5 file with mordred features
 """
 
 __author__ = "A.J. Preto"
@@ -29,8 +29,8 @@ import numpy as np
 import h5py as h5
 from icaro_variables import ICARO_BASE_FILE, SYSTEM_SEP, CSV_SEP, \
 							MORDRED_FEATURES_FILE, FEATURES_MORDRED_FOLDER, \
-							CSV_TERMINATION, FEATURES_DAVIS_MORDRED_FOLDER, SUPPORT_FOLDER, \
-							MORDRED_FEATURES_FILE_H5, MORDRED_DAVIS_FEATURES_FILE_H5
+							CSV_TERMINATION, SUPPORT_FOLDER, \
+							MORDRED_FEATURES_FILE_H5
 
 def retrieve_unique_smiles(input_file_name, smile_column = "Canonical_Smiles", id_column = "Molecule_ChEMBLID"):
 
@@ -84,11 +84,11 @@ def merge_files(input_folder = FEATURES_MORDRED_FOLDER, \
 				processed_table = np.nan_to_num(pd.to_numeric(list(opened_file.drop(droppable_columns, axis = 1).values[0]), errors = "coerce"), nan = 0.0)
 				current_dataset = h5_file.create_dataset(smile_value.replace("/",""), dtype = "float", data = processed_table) 
 
-if not os.path.exists(FEATURES_DAVIS_MORDRED_FOLDER):
-    os.makedirs(FEATURES_DAVIS_MORDRED_FOLDER)
+if not os.path.exists(FEATURES_MORDRED_FOLDER):
+    os.makedirs(FEATURES_MORDRED_FOLDER)
 print("#### ICARO- Feature Extraction MORDRED")
 #fetch_mordred_features(retrieve_unique_smiles(ICARO_BASE_FILE))
-fetch_mordred_features(retrieve_unique_smiles(SUPPORT_FOLDER+"/Davis_comp_smiles.csv", smile_column = "SMILES", id_column = "Comp_Name"), \
-	output_folder = FEATURES_DAVIS_MORDRED_FOLDER, smile_column = "SMILES", id_column = "Comp_Name")
+fetch_mordred_features(retrieve_unique_smiles(SUPPORT_FOLDER+"/Mordred_comp_smiles.csv", smile_column = "SMILES", id_column = "Comp_Name"), \
+	output_folder = FEATURES_MORDRED_FOLDER, smile_column = "SMILES", id_column = "Comp_Name")
 
-merge_files(input_folder = FEATURES_DAVIS_MORDRED_FOLDER, output_file = MORDRED_DAVIS_FEATURES_FILE_H5, verbose = True)
+merge_files(input_folder = FEATURES_MORDRED_FOLDER, output_file = MORDRED_FEATURES_FILE_H5, verbose = True)
