@@ -10,7 +10,7 @@ import numpy as np
 ####### iFeature Feature Extraction
 #INPUT FILES: (path: "./new_prediction/") "protein_sequence_predict.fa"
 #OUTPUT FILES: (path: "./features/results_ifeature/")
-#for each ifeature feature, a .tsv file is saved on "./results/results_ifeature/" folder
+#for each ifeature feature, a .tsv file is saved on "./features/results_ifeature/" folder
 #IMPORTANT: make sure that you have iFeature folder in "./feature/" folder, you can download this folder with:
 #git clone https://github.com/Superzchen/iFeature
 
@@ -53,6 +53,7 @@ icaro_functions.write_h5(h5_ifeature, predict_data)
 
 ####### Family Information Feature Extraction
 #INPUT FILES: (path: "./new_prediction/") "protein_sequence_predict.fa"
+#OUTPUT FILES: (path: "./features/") "icaro_prediction_normalized_prt_family.h5"
 
 print("#### ICARO- 2: Protein Family Information Features Extraction")
 FAM_PRT_FOLDER= FEATURES_FOLDER + SYSTEM_SEP + "family_prt/"
@@ -99,7 +100,7 @@ os.chdir(DATA_FOLDER)
 
 ####### fp-ADMET Feature Normalization
 #INPUT FILES: (path: "./features/fpadmet/RESULTS/")
-#OUTPUT FILES: "icaro_prediction_normalized_admet.h5"
+#OUTPUT FILES: (path: "./features/") "icaro_prediction_normalized_admet.h5"
 
 print("#### ICARO- 3: fp-Admet Normalization")
 smile_file = DATA_FOLDER + "ligand_smiles_predict.smi"
@@ -139,7 +140,7 @@ icaro_functions.write_h5(h5_admet, final_table)
 
 ####### Mordred Feature Extraction
 #INPUT FILES: (path: "./new_prediction/") "ligand_smiles_predict.smi"
-#OUTPUT FILES: "icaro_prediction_mordred.h5"
+#OUTPUT FILES: (path: "./features/") "icaro_prediction_mordred.h5"
 
 if not os.path.exists(FEATURES_MORDRED_FOLDER+"/"):
     os.makedirs(FEATURES_MORDRED_FOLDER+"/")
@@ -165,8 +166,8 @@ with h5py.File(FEATURES_FOLDER+"/icaro_prediction_mordred.h5", "w") as h5_file:
 print("#### Mordred prediction shape:",processed_table.shape)
 
 ####### Mordred Feature Normalization
-#INPUT FILES: "icaro_prediction_mordred.h5"
-#OUTPUT FILES: "icaro_prediction_normalized_mordred.h5"
+#INPUT FILES: (path: "./features/") "icaro_prediction_mordred.h5"
+#OUTPUT FILES: (path: "./features/") "icaro_prediction_normalized_mordred.h5"
 
 
 #Generate the file with the normalization metrics
@@ -187,8 +188,9 @@ to_normalize_object.filter_normalization(save_new = False) #,new_norm_csv = MORD
 to_normalize_object.apply_normalization(output_file_name = FEATURES_FOLDER+"/icaro_prediction_normalized_mordred.h5")
 
 ####### New prediction
-#INPUT FILES: "icaro_prediction_mordred.h5"
-#OUTPUT FILES: "icaro_prediction_normalized_mordred.h5"
+#INPUT FILES: (path: "./features/") "icaro_prediction_normalized_mordred.h5", "icaro_prediction_normalized_admet.h5"
+# "icaro_prediction_normalized_ifeature.h5", "icaro_prediction_normalized_prt_family.h5"
+#OUTPUT FILES: (path: "./new_predictions/") "new_predictions.csv" with IC50 predictions
 
 print("#### ICARO- 5: ICARO prediction")
 
