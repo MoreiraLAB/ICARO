@@ -233,7 +233,7 @@ def fetch_mordred_features(input_table, smile_column = "Canonical_Smiles", id_co
 		current_dataframe = pd.DataFrame.from_dict(features_dictionary, orient = "index")
 		clean_dataframe = pd.to_numeric(current_dataframe[0], errors ='coerce').fillna(0).astype(float)
 		processed_molecule_dataframe = current_dataframe.transpose()
-
+		print(processed_molecule_dataframe)
 		processed_molecule_dataframe["ID"] = row[id_column]
 		processed_molecule_dataframe["SMILE"] = row[smile_column]
 		if write_mode == True:
@@ -290,7 +290,7 @@ class normalizer:
 	"""
 
 	def __init__(self, input_format = "h5py", verbose = True, \
-						log_file_name = "norm.csv", log_file_type = "csv", \
+						log_file_name = icaro_variables.MORDRED_FOLDER+"/norm.csv", log_file_type = "csv", \
 						source = "", normalization_type = "mean_and_scale", \
 						input_header = True, header_file = "", \
 						droppable_columns = [], usable_entries = "all"):
@@ -323,7 +323,7 @@ class normalizer:
 
 		if self.input_header == True:
 			self.header = list(pd.read_csv(self.header_file, header = 0, nrows = 2).drop(self.droppable_columns, axis = 1))
-
+			print(len(self.header))
 		elif self.input_header == False:
 			self.fetch_number_of_columns()
 			self.header = list(range(0, self.number_of_columns))
@@ -418,16 +418,15 @@ class normalizer:
 
 	def apply_normalization(self, output_file_name = "", output_format = "h5py"):
 		print(self)
-		with h5py.File(self.source, "r") as input_file, h5py.File(output_file_name, "w") as output_file:
+		with h5py.File(icaro_variables.FEATURES_FOLDER+"/icaro_prediction_mordred.h5", "r") as input_file, h5py.File(output_file_name, "w") as output_file:
 			if self.usable_entries == "all":
 				self.usable_entries = list(input_file)
 			self.number_of_entries = len(self.usable_entries)
 			for index, current_entry in enumerate(self.usable_entries):
-				print(current_entry)
 				retrieved_values = np.delete(input_file[current_entry][:], self.useless_rows)
 				if self.normalization_type == "mean_and_scale":
 					normalized_values = np.divide(np.subtract(retrieved_values, self.average_values), self.standard_deviation_values)
 					current_dataset = output_file.create_dataset(current_entry, dtype = "float", data = normalized_values.astype(float)) 
 				if (self.verbose == True) and ((index + 1) % 100 == 0):
 					print("Normalized values at", index + 1, "/", self.number_of_entries)
-			print(len(normalized_values))
+			print("MORDRED FEATURES:",len(normalized_values))
