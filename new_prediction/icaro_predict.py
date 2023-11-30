@@ -1,5 +1,5 @@
 import os
-from icaro_variables import DATA_FOLDER, FEATURES_FOLDER, NORMALIZE_FOLDER, FEATURES_MORDRED_FOLDER, CSV_TERMINATION, MODEL_FOLDER
+from icaro_variables import DATA_FOLDER, FEATURES_FOLDER, NORMALIZE_FOLDER, FEATURES_MORDRED_FOLDER, CSV_TERMINATION, MODEL_FOLDER, MORDRED_FOLDER
 import icaro_functions
 import pandas as pd
 import h5py
@@ -53,7 +53,6 @@ icaro_functions.write_h5(h5_ifeature, predict_data)
 
 ####### Family Information Feature Extraction
 #INPUT FILES: (path: "./new_prediction/") "protein_sequence_predict.fa"
-#OUTPUT FILES: (path: "./results/results_ifeature/") "icaro_prediction_normalized_prt_family.h5"
 
 print("#### ICARO- 2: Protein Family Information Features Extraction")
 FAM_PRT_FOLDER= FEATURES_FOLDER + SYSTEM_SEP + "family_prt/"
@@ -65,7 +64,7 @@ many_class_targets = fam_data.loc[fam_data.duplicated(subset="Target_ChEMBLID",k
 families = fam_data["Class_l1"].unique().tolist() #There are 15 unique families
 families.sort()
 
-"""Write dataframe with one-hot-encoding representation of proteins' families"""
+#Write dataframe with one-hot-encoding representation of proteins' families
 final_data = icaro_functions.onehot_fam_feature(fam_data, families)
 final_data = final_data.loc[:, final_data.var(axis=0, numeric_only=True) != 0]
 final_data.insert(0, "index", final_data.index)
@@ -108,8 +107,8 @@ smile_file =  icaro_functions.open_txt(smile_file)
 lig_predict_ids = [i.split("\t")[1] for i in smile_file]
 lig_predict_smiles = [i.split("\t")[0] for i in smile_file]
 
-"""Change to ADMET directory and open files. All features are binary or a class except
-from the features 50 to 56, inclusive, that are a numeric value"""
+#Change to ADMET directory and open files. All features are binary or a class except
+#from the features 50 to 56, inclusive, that are a numeric value
 ADMET_RESULTS_FOLDER = ADMET_FOLDER +"RESULTS/"
 os.chdir(ADMET_RESULTS_FOLDER)
 files = os.listdir()
@@ -146,7 +145,7 @@ if not os.path.exists(FEATURES_MORDRED_FOLDER+"/"):
     os.makedirs(FEATURES_MORDRED_FOLDER+"/")
 
 print("#### ICARO- 4: Feature Extraction MORDRED")
-MORDRED_FOLDER = NORMALIZE_FOLDER + SYSTEM_SEP + "mordred_norm/"
+
 #fetch_mordred_features(retrieve_unique_smiles(ICARO_BASE_FILE))
 
 icaro_functions.fetch_mordred_features(pd.DataFrame({'Canonical_Smiles': lig_predict_smiles, 'Molecule_ChEMBLID': lig_predict_ids}), \
@@ -169,28 +168,29 @@ print("#### Mordred prediction shape:",processed_table.shape)
 #INPUT FILES: "icaro_prediction_mordred.h5"
 #OUTPUT FILES: "icaro_prediction_normalized_mordred.h5"
 
-"""
-Generate the file with the normalization metrics
-"""
+
+#Generate the file with the normalization metrics
+
 
 input_header_file = MORDRED_FOLDER+"/CHEMBL2.csv" # Example file containing the header
 
-"""
-Run first block to calculate normalization vectors, second block to actually normalize
-"""
+
+#Run first block to calculate normalization vectors, second block to actually normalize
+
 print("#### ICARO- 4: MORDRED Normalization")
 
 to_normalize_object = icaro_functions.normalizer(source = "icaro_prediction_mordred.h5", \
 						header_file = input_header_file, \
 						droppable_columns = ["ID", "SMILE"], usable_entries = lig_predict_ids)
-
-to_normalize_object.filter_normalization(save_new = False, new_norm_csv = MORDRED_FOLDER+"/new_norm.csv")
+to_normalize_object.attach_header()
+to_normalize_object.filter_normalization(save_new = False) #,new_norm_csv = MORDRED_FOLDER+"/new_norm.csv")
 to_normalize_object.apply_normalization(output_file_name = FEATURES_FOLDER+"/icaro_prediction_normalized_mordred.h5")
 
 ####### New prediction
 #INPUT FILES: "icaro_prediction_mordred.h5"
 #OUTPUT FILES: "icaro_prediction_normalized_mordred.h5"
 
+print("#### ICARO- 5: ICARO prediction")
 
 def retrieve_features(pd_class):
     output = []
@@ -211,9 +211,12 @@ def retrieve_features(pd_class):
 
 
 predict_features = retrieve_features(pd.DataFrame({'Target_ChEMBLID': prt_predict_ids, 'Molecule_ChEMBLID': lig_predict_ids}))
-print(len(predict_features[0]))
+print("Total number of features:",len(predict_features[0]))
 
-model = icaro_functions.load_model(MODEL_FOLDER+'/SGD.sav')
+model = icaro_functions.load_model(MODEL_FOLDER+'/XTrees.sav')
 ic50 = model.predict(predict_features)
+predictions = pd.DataFrame({'Target_ChEMBLID': prt_predict_ids, 'Molecule_ChEMBLID': lig_predict_ids, 'pIC50_prediction': ic50})
+predictions.to_csv(DATA_FOLDER+'/new_predictions.csv', index=False)
 
-pd.DataFrame({'Target_ChEMBLID': prt_predict_ids, 'Molecule_ChEMBLID': lig_predict_ids, 'pIC50_prediction': ic50}).to_csv(DATA_FOLDER+'/new_predictions.csv', index=False)
+print("#### ICARO- 6: ICARO output file with prediction saved in new_predictions.csv")
+print(predictions)
