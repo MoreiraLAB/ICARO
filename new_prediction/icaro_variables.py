@@ -20,7 +20,7 @@ CSV_TERMINATION = ".csv"
 PARAGRAPH_SEP = "\n"
 TXT_TERMINATION = ".txt"
 
-DEFAULT_LOCATION = "/home/user/ICARO/new_prediction" #"Change/to/user/location"
+DEFAULT_LOCATION = "Change/to/user/location/ICARO/new_prediction" #
 DATA_FOLDER = DEFAULT_LOCATION + SYSTEM_SEP
 FEATURES_FOLDER = DEFAULT_LOCATION + SYSTEM_SEP + "features"
 NORMALIZE_FOLDER = FEATURES_FOLDER + SYSTEM_SEP + "normalization"
