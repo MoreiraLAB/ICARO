@@ -38,7 +38,7 @@ Required information to replicate ICARO<sub>ERT</sub>: an ensemble of Extreme Ra
 ### New pIC50 prediction:
 A) Feature Normalization Files are within ./ICARO/new_prediction/features/normalization/ folder
 
-B) You can download the trained XTree model in ... 
+B) You can download the trained XTree model in [link](https://www.dropbox.com/scl/fo/zfb4syff5vpmbdwvfjzzg/h?rlkey=fxk58b0fvcrqw8ktfpyv7ndoj&dl=0). 
    Please save this file in ./ICARO/new_prediction/model/
    
 C) Input files:
