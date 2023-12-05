@@ -37,24 +37,35 @@ Required information to replicate ICARO<sub>ERT</sub>: an ensemble of Extreme Ra
 
 ### New pIC50 prediction:
 A) Feature Normalization Files are within ./ICARO/new_prediction/features/normalization/ folder
+
 B) You can download the trained XTree model in ... 
    Please save this file in ./ICARO/new_prediction/model/
+   
 C) Input files:
    For a new prediction, ICARO needs the protein id and fasta and ligand id and smile.
    Protein input example: ./ICARO/new_prediction/protein_sequence_predict.fa
    Ligand input example: ./ICARO/new_prediction/ligand_smiles_predict.smi
+   
 D) Script files:
+
    ./ICARO/new_prediction/icaro_variables.py - has important variables to run ICARO new predictions.
+   
    Please change your working directory in DEFAULT_LOCATION
+   
    ./ICARO/new_prediction/icaro_functions.py - has important functions to run all feature extraction and normalization.
+   
    ./ICARO/new_prediction/fp_admet.sh - script needed to run fp-ADMET descriptors
+   
    ./ICARO/new_prediction/icaro_predict.py - script that retrieves protein and ligand features for a new prediction and retrieves pIC50 predictions
+   
    This script uses as input files: protein_sequence_predict.fa and ligand_smiles_predict.smi
 
    NOTE: After ifeature and fp-ADMET installation within the ./ICARO/new_prediction/features/ folder, model download in the ./ICARO/new_prediction/model/ folder, you can run a new prediction with your proteins and ligands, by running the command:
+   
    ```bash
    python3 icaro_predict.py
    ```
+
 E) Output file:
    The new predictions will be stored at ./ICARO/new_prediction/new_predictions.csv
    
