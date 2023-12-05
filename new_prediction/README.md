@@ -38,21 +38,21 @@ Required information to replicate ICARO<sub>ERT</sub>: an ensemble of Extreme Ra
 ### New pIC50 prediction:
 A) Feature Normalization Files are within ./ICARO/new_prediction/features/normalization/ folder
 
-B) You can download the trained XTree model in [link](https://www.dropbox.com/scl/fo/zfb4syff5vpmbdwvfjzzg/h?rlkey=fxk58b0fvcrqw8ktfpyv7ndoj&dl=0). 
+B) You can download the trained XTree model in the [link](https://www.dropbox.com/scl/fo/zfb4syff5vpmbdwvfjzzg/h?rlkey=fxk58b0fvcrqw8ktfpyv7ndoj&dl=0). 
    Please save this file in ./ICARO/new_prediction/model/
    
-C) Input files:
-   For a new prediction, ICARO needs the protein id and fasta and ligand id and smile.
-   Protein input example: ./ICARO/new_prediction/protein_sequence_predict.fa
-   Ligand input example: ./ICARO/new_prediction/ligand_smiles_predict.smi
+C) Input files: For a new prediction, ICARO requires the protein id, fasta, ligand id, and smile. 
+Example of protein input /ICARO/new_prediction/protein_sequence_predict.fa 
+Example of ligand input: ./ICARO/new_prediction/ligand_smiles_predict.smi
    
 D) Script files:
 
-   ./ICARO/new_prediction/icaro_variables.py - has important variables to run ICARO new predictions.
+   ./ICARO/new_prediction/icaro_variables.py - has important variables for running new ICARO predictions.
    
    Please change your working directory in DEFAULT_LOCATION
    
-   ./ICARO/new_prediction/icaro_functions.py - has important functions to run all feature extraction and normalization.
+   ./ICARO/new_prediction/icaro_functions.py - has important functions in running all feature extractions and normalizations.
+.
    
    ./ICARO/new_prediction/fp_admet.sh - script needed to run fp-ADMET descriptors
    
