@@ -21,7 +21,7 @@ These requirements can be met using a pip.
 
 * iFeature - GitHub available at https://github.com/Superzchen/iFeature. The iFeature folder should be downloaded into. /feature/ folder.
 
-* fp-admet - Github available at https://github.com/jcheminform/fpadmet. YThe fp-admet folder should be downloaded into. /feature/ folder.
+* fp-admet - Github available at https://github.com/jcheminform/fpadmet. The fp-admet folder should be downloaded into. /feature/ folder.
   
 * MORDRED - version 1.2.0 .
 * RDKit - version 2023.9.1 .
@@ -37,7 +37,7 @@ These requirements can be met using a pip.
 Required information to replicate ICARO<sub>ERT</sub>: an ensemble of Extreme Randomized Trees for Prediction of Protein-Ligand IC<sub>50</sub> is described in this Repository.
 
 ### Study Replication:
-A) Dataset files: All data and support files are available in 10.5281/zenodo.10159825
+A) Dataset files: All data and support files are available in this [link](https://www.dropbox.com/scl/fo/zfb4syff5vpmbdwvfjzzg/h?rlkey=fxk58b0fvcrqw8ktfpyv7ndoj&dl=0). 
    Please, download data files into ./ICARO/data/ folder.
 
 B) Script files:
