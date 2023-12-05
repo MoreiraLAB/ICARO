@@ -100,4 +100,4 @@ python3 6_model_xtrees.py
 
 ### If you use our predictor, please cite the following.
 
-[Ana T. Gaspar, Catarina Marques-Pereira, António J. Preto and Irina S. Moreira - ICARO: IC<sub>50</sub> binding Affinity Regression Opti-mized] PENDING CITATION
+[Ana T. Gaspar, Catarina Marques-Pereira, António J. Preto and Irina S. Moreira - ICARO: IC<sub>50</sub> binding Affinity Regression Optimized] PENDING CITATION
