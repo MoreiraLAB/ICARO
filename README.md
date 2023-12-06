@@ -36,6 +36,16 @@ These requirements can be met using a pip.
 
 Required information to replicate ICARO<sub>ERT</sub>: an ensemble of Extreme Randomized Trees for Prediction of Protein-Ligand IC<sub>50</sub> is described in this Repository.
 
+### Training, Test and Validation Datasets:
+Data files regardinig protein and ligand features of training, test and validation datasets are available in this [link](https://www.dropbox.com/scl/fo/zfb4syff5vpmbdwvfjzzg/h?rlkey=fxk58b0fvcrqw8ktfpyv7ndoj&dl=0).
+
+./data_feature/ folder contains all feature .h5 files, organized by protein or ligand key. For model training, testing and validation, protein-ligand interactivos features are retrieved from these files, by protein and ligand keys. Interaction keys for training, test and validation datasets can be accessed in ./train_test_validation_keys/ in the following files:
+
+ 1) "train_targets.txt", "train_ligands.txt", train_interactions.txt"- files with train protein keys, ligand keys and corresponding interactions.
+ 2) "test_targets.txt", "test_ligands.txt", "test_interactions.txt"- files with test protein keys, ligand keys and corresponding interactions.
+ 3) "validation_unique_targets.txt", "validation_unique_ligands", "validation_all_interactions.txt"- files with validation protein keys, ligand keys and corresponding interactions.
+ 4) "validation_inter_prots.txt", "validation_inter_ligs.txt", "validation_inter_prots_ligs"- files with interactions on the validation protein dataset, ligand dataset and protein-ligand dataset.
+
 ### Study Replication:
 A) Dataset files: All data and support files are available in this [link](https://www.dropbox.com/scl/fo/zfb4syff5vpmbdwvfjzzg/h?rlkey=fxk58b0fvcrqw8ktfpyv7ndoj&dl=0). 
    Please, download data files into ./ICARO/data/ folder.
